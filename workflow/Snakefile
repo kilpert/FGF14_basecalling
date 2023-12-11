@@ -430,38 +430,3 @@ rule multiqc:
     wrapper:
         "v3.1.0/bio/multiqc"
 
-
-rule read_lengths:
-    input:
-        "{results}/{guppy}/{run}/{cfg_type}/fastq/{sample}.fastq.gz"
-    output:
-        "{results}/{guppy}/{run}/{cfg_type}/fastq/qc/read_lengths/tsv/{sample}.read_lengths.tsv"
-    shell:
-        "( "
-        "echo -e 'n\tbp'; "
-        "zcat {input} "
-        "| sed -n '2~4p' "
-        "| awk '{{print length}}' "
-        "| sort -n "
-        "| uniq -c"
-        "| sed 's/^ *//g' "
-        "| sed 's/ /\t/' "
-        ") "
-        ">{output} "
-
-
-rule read_length_plots:
-    input:
-        tsv=expand("{{results}}/{{guppy}}/{{run}}/{{cfg_type}}/fastq/qc/read_lengths/tsv/{sample}.read_lengths.tsv",
-            sample=samples,
-        )
-    output:
-        "{results}/{guppy}/{run}/{cfg_type}/fastq/qc/read_lengths/{run}.{cfg_type}.read_lengths.html"
-    params:
-        run="{run} - {cfg_type}"
-    conda:
-        "envs/python.yaml"
-
-    notebook:
-        "notebooks/read_length_plots.ipynb"
-
