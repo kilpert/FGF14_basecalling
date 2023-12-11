@@ -1,0 +1,4 @@
+.snakemake/
+results*/
+example/
+guppy_basecaller-core-dump-db/
