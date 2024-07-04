@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/728584888.svg)](https://zenodo.org/doi/10.5281/zenodo.12655177)
+
 # FGF14 basecalling
 
 This [Snakemake](https://github.com/snakemake/snakemake) workflow performs basecalling for [Nanopore](https://nanoporetech.com/) sequencing runs. It was specifically testet for output of the [MinION Mk1B](https://nanoporetech.com/products/sequence/minion). 
